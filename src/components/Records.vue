@@ -58,21 +58,21 @@ const itemsTypeSelect = [
     <tbody>
     <tr v-for="record in records">
     <td class="table-cell">
-          <app-input-text class="input" :id="`list-label-${record.key}`" v-model="record.label" />
+          <app-input-text class="input" :id="`list-label-${record.key}`" :invalid="record.label.length>50" v-model="record.label" @change="onChange" />
         </td>
     <td class="table-cell">
           <app-select class="select"  :options=itemsTypeSelect placeholder="Выберите тип" id="type" v-model="record.type" @change="onChange" />
         </td>
     <template v-if="record.type==='Локальная'">
         <td class="table-cell">
-            <app-input-text class="input" :id="`list-login-${record.key}`" :invalid="!record.login||record.login.length>10"  v-model="record.login" @change="onChange"/>
+            <app-input-text class="input" :id="`list-login-${record.key}`" :invalid="!record.login||record.login.length>100"  v-model="record.login" @change="onChange"/>
             </td>
         <td class="table-cell">
-            <app-password class="input" :id="`list-password-${record.key}`" :invalid="!record.password||record.password.length>10" v-model="record.password" @change="onChange"/>
+            <app-password class="input" :id="`list-password-${record.key}`" :invalid="!record.password||record.password.length>100" v-model="record.password" @change="onChange"/>
             </td>
     </template>
     <td class="table-cell" v-if="record.type==='LDAP'" colspan="2">
-        <app-input-text class="input" :id="`list-login-${record.key}`" :invalid="!record.login||record.login.length>10" v-model="record.login" @change="onChange"/>
+        <app-input-text class="input" :id="`list-login-${record.key}`" :invalid="!record.login||record.login.length>100" v-model="record.login" @change="onChange"/>
     </td>
     <td class="table-cell">
         <app-button class="btn-delete" severity="primary" variant="outlined" icon="pi pi-trash" @click="remove(record.key)"/>
